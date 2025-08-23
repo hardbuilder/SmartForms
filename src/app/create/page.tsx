@@ -431,23 +431,29 @@ function CreateFormPageContent() {
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
       <Header showDashboardButton={true} />
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-2 md:px-4 py-4 md:py-8">
         <Tabs defaultValue="questions" className="w-full">
-            <div className="flex justify-center mb-8">
-                <TabsList className={isMobile ? "grid grid-cols-2 h-auto" : ""}>
-                    <TabsTrigger value="questions">
-                        <ListChecks className="mr-2 h-4 w-4" /> Questions
+            <div className="flex justify-center mb-6 md:mb-8">
+                <TabsList className={isMobile ? "grid grid-cols-3 w-full max-w-lg h-auto p-1" : ""} >
+                    <TabsTrigger value="questions" className={isMobile ? "text-xs p-2" : ""}>
+                        <ListChecks className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                        <span className="hidden sm:inline">Questions</span>
+                        <span className="sm:hidden">Q</span>
                     </TabsTrigger>
-                    <TabsTrigger value="responses" className="relative">
-                        <LineChart className="mr-2 h-4 w-4" /> Responses
+                    <TabsTrigger value="responses" className={`relative ${isMobile ? "text-xs p-2" : ""}`}>
+                        <LineChart className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                        <span className="hidden sm:inline">Responses</span>
+                        <span className="sm:hidden">R</span>
                         {responses.length > 0 && (
-                          <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
+                          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                             {responses.length}
                           </span>
                         )}
                     </TabsTrigger>
-                    <TabsTrigger value="settings">
-                        <Settings className="mr-2 h-4 w-4" /> Settings
+                    <TabsTrigger value="settings" className={isMobile ? "text-xs p-2" : ""}>
+                        <Settings className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                        <span className="hidden sm:inline">Settings</span>
+                        <span className="sm:hidden">S</span>
                     </TabsTrigger>
                 </TabsList>
             </div>
@@ -466,20 +472,26 @@ function CreateFormPageContent() {
             <TabsContent value="responses">
                  <Card>
                     <CardHeader>
-                       <div className="flex justify-between items-center">
+                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
                             <div>
-                                <CardTitle className="text-2xl">{responses.length} response{responses.length !== 1 && 's'}</CardTitle>
-                                <CardDescription>View and analyze the submissions for your form.</CardDescription>
+                                <CardTitle className="text-xl md:text-2xl">{responses.length} response{responses.length !== 1 && 's'}</CardTitle>
+                                <CardDescription className="text-sm">View and analyze the submissions for your form.</CardDescription>
                             </div>
                             <div className="flex items-center gap-2">
-                                <Button onClick={() => handleDownloadResponses('xlsx')} disabled={responses.length === 0}>
-                                    <FileDown className="mr-2 h-4 w-4" />
-                                    Download (.xlsx)
+                                <Button 
+                                    onClick={() => handleDownloadResponses('xlsx')} 
+                                    disabled={responses.length === 0}
+                                    size={isMobile ? "sm" : "default"}
+                                    className={isMobile ? "text-xs" : ""}
+                                >
+                                    <FileDown className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                                    <span className="hidden sm:inline">Download (.xlsx)</span>
+                                    <span className="sm:hidden">Excel</span>
                                 </Button>
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <Button variant="outline" size="icon">
-                                            <MoreVertical className="h-4 w-4" />
+                                        <Button variant="outline" size={isMobile ? "sm" : "icon"}>
+                                            <MoreVertical className="h-3 w-3 md:h-4 md:w-4" />
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
@@ -500,11 +512,27 @@ function CreateFormPageContent() {
                     </CardHeader>
                     <CardContent>
                         <Tabs defaultValue="summary" className="w-full">
-                            <TabsList>
-                                <TabsTrigger value="summary"><BarChartBig className="mr-2 h-4 w-4" />Summary</TabsTrigger>
-                                <TabsTrigger value="question"><HelpCircle className="mr-2 h-4 w-4" />Question</TabsTrigger>
-                                <TabsTrigger value="individual"><UserSquare className="mr-2 h-4 w-4" />Individual</TabsTrigger>
-                                <TabsTrigger value="plagiarism"><ShieldCheck className="mr-2 h-4 w-4" />Plagiarism</TabsTrigger>
+                            <TabsList className={isMobile ? "grid grid-cols-2 w-full h-auto" : ""}>
+                                <TabsTrigger value="summary" className={isMobile ? "text-xs p-2" : ""}>
+                                    <BarChartBig className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                                    <span className="hidden sm:inline">Summary</span>
+                                    <span className="sm:hidden">Sum</span>
+                                </TabsTrigger>
+                                <TabsTrigger value="question" className={isMobile ? "text-xs p-2" : ""}>
+                                    <HelpCircle className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                                    <span className="hidden sm:inline">Question</span>
+                                    <span className="sm:hidden">Que</span>
+                                </TabsTrigger>
+                                <TabsTrigger value="individual" className={isMobile ? "text-xs p-2" : ""}>
+                                    <UserSquare className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                                    <span className="hidden sm:inline">Individual</span>
+                                    <span className="sm:hidden">Ind</span>
+                                </TabsTrigger>
+                                <TabsTrigger value="plagiarism" className={isMobile ? "text-xs p-2" : ""}>
+                                    <ShieldCheck className="mr-1 md:mr-2 h-3 w-3 md:h-4 md:w-4" />
+                                    <span className="hidden sm:inline">Plagiarism</span>
+                                    <span className="sm:hidden">Plag</span>
+                                </TabsTrigger>
                             </TabsList>
                             <TabsContent value="summary" className="mt-6">
                                 <Card>
@@ -538,33 +566,33 @@ function CreateFormPageContent() {
                             <TabsContent value="question" className="mt-6">
                                 <Card>
                                     <CardHeader>
-                                        <div className="flex justify-between items-center">
-                                            <div className="flex items-center gap-4">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                                            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                                                 <Select value={String(currentQuestionIndex)} onValueChange={(val) => handleQuestionChange(Number(val))}>
-                                                    <SelectTrigger className="w-[300px]">
+                                                    <SelectTrigger className="w-full sm:w-[280px] md:w-[300px]">
                                                         <SelectValue placeholder="Select a question" />
                                                     </SelectTrigger>
                                                     <SelectContent>
                                                         {formState.questions.map((q, index) => (
                                                             <SelectItem key={q.id} value={String(index)}>
-                                                                {index + 1}. {q.text}
+                                                                {index + 1}. {q.text.slice(0, 50)}{q.text.length > 50 ? '...' : ''}
                                                             </SelectItem>
                                                         ))}
                                                     </SelectContent>
                                                 </Select>
-                                                <div className="flex items-center gap-2">
-                                                    <Button variant="outline" size="icon" onClick={() => handleQuestionChange(currentQuestionIndex - 1)} disabled={currentQuestionIndex === 0}>
-                                                        <ChevronLeft className="h-4 w-4" />
+                                                <div className="flex items-center gap-2 justify-center sm:justify-start">
+                                                    <Button variant="outline" size={isMobile ? "sm" : "icon"} onClick={() => handleQuestionChange(currentQuestionIndex - 1)} disabled={currentQuestionIndex === 0}>
+                                                        <ChevronLeft className="h-3 w-3 md:h-4 md:w-4" />
                                                     </Button>
-                                                    <span className="text-sm text-muted-foreground">
+                                                    <span className="text-sm text-muted-foreground whitespace-nowrap">
                                                         {currentQuestionIndex + 1} of {formState.questions.length}
                                                     </span>
-                                                    <Button variant="outline" size="icon" onClick={() => handleQuestionChange(currentQuestionIndex + 1)} disabled={currentQuestionIndex === formState.questions.length - 1}>
-                                                        <ChevronRight className="h-4 w-4" />
+                                                    <Button variant="outline" size={isMobile ? "sm" : "icon"} onClick={() => handleQuestionChange(currentQuestionIndex + 1)} disabled={currentQuestionIndex === formState.questions.length - 1}>
+                                                        <ChevronRight className="h-3 w-3 md:h-4 md:w-4" />
                                                     </Button>
                                                 </div>
                                             </div>
-                                            <div className="text-sm text-muted-foreground">
+                                            <div className="text-sm text-muted-foreground text-center sm:text-right">
                                                 {responses.length} response(s)
                                             </div>
                                         </div>
