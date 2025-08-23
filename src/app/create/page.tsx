@@ -430,7 +430,7 @@ function CreateFormPageContent() {
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <Header />
+      <Header showDashboardButton={true} />
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="questions" className="w-full">
             <div className="flex justify-center mb-8">

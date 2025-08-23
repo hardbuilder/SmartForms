@@ -40,7 +40,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <Header />
+      <Header showAuthButtons={true} showUserMenu={false} />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative container mx-auto px-4 py-20 md:py-32 text-center overflow-hidden">

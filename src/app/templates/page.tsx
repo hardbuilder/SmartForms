@@ -21,7 +21,7 @@ export default function TemplatesPage() {
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased">
-      <Header />
+      <Header showDashboardButton={true} />
       <main className="container mx-auto px-4 py-8 md:py-16">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold tracking-tight">Choose a Template</h1>
